@@ -1,10 +1,12 @@
 package ru.devsand.classfinder;
 
-import ru.devsand.classfinder.core.ClassFinder;
+import ru.devsand.classfinder.search.ClassFinder;
+import ru.devsand.classfinder.search.SimpleClassFinder;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class Launcher {
 
@@ -72,8 +74,9 @@ public class Launcher {
     private static void printClassNames(String[] args) {
         Path filePath = Paths.get(args[0]);
         String pattern = args[1];
-        ClassFinder classFinder = ClassFinder.forTextFile(filePath, pattern);
-        List<String> classNames = classFinder.getClassNames();
+        ClassFinder classFinder = new SimpleClassFinder(
+                () -> Arrays.asList("a.b.FooBarBaz", "c.d.FooBar"));
+        Collection<String> classNames = classFinder.find(pattern);
         classNames.forEach(System.out::println);
     }
 
