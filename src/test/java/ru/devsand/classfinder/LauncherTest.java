@@ -2,10 +2,10 @@ package ru.devsand.classfinder;
 
 import org.junit.Test;
 
-import static ru.devsand.classfinder.ClassFinder.main;
+import static ru.devsand.classfinder.Launcher.main;
 
 
-public class ClassFinderTest {
+public class LauncherTest {
 
     @Test
     public void checkMainWithOkArgs() {

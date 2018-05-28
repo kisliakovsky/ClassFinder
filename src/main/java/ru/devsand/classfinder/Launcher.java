@@ -1,6 +1,12 @@
 package ru.devsand.classfinder;
 
-public class ClassFinder {
+import ru.devsand.classfinder.core.ClassFinder;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+public class Launcher {
 
     private static final String ERROR_LABEL = "Error:";
     private static final String HELP_FLAG = "--help";
@@ -21,17 +27,17 @@ public class ClassFinder {
 
     public static void main(String[] args) {
         try {
-            args = requireArgsCorrect(args);
+            args = requireArgsExternallyCorrect(args);
             if (args.length == 1) {
                 printHelp();
             } else {
-                findClasses(args[0], args[1]);
+                printClassNames(args);
             }
         } catch (IllegalArgumentException ignored) {
         }
     }
 
-    private static String[] requireArgsCorrect(String[] args) {
+    private static String[] requireArgsExternallyCorrect(String[] args) {
         final int argsNumber = args.length;
         switch (argsNumber) {
             case 0:
@@ -45,7 +51,6 @@ public class ClassFinder {
                     printErrorAndThrowException(message);
                 }
             case 2:
-                System.out.println("It's ok, man!");
                 return args;
             default:
                 String message = String.format("extra arguments after '%s' and '%s'",
@@ -64,8 +69,12 @@ public class ClassFinder {
         System.out.println(HELP_MESSAGE);
     }
 
-    private static void findClasses(String fileName, String pattern) {
-        System.out.println("I'm going to find classes!");
+    private static void printClassNames(String[] args) {
+        Path filePath = Paths.get(args[0]);
+        String pattern = args[1];
+        ClassFinder classFinder = ClassFinder.forTextFile(filePath, pattern);
+        List<String> classNames = classFinder.getClassNames();
+        classNames.forEach(System.out::println);
     }
 
 }
