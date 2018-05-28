@@ -1,8 +1,13 @@
 package ru.devsand.classfinder.search;
 
+import ru.devsand.classfinder.pattern.CamelCasePattern;
+import ru.devsand.classfinder.pattern.ClassNamePattern;
+import ru.devsand.classfinder.string.ClassName;
+
 import java.util.Collection;
-import java.util.Collections;
 import java.util.function.Supplier;
+
+import static java.util.stream.Collectors.toSet;
 
 public class SimpleClassFinder implements ClassFinder {
 
@@ -13,7 +18,13 @@ public class SimpleClassFinder implements ClassFinder {
     }
 
     public Collection<String> find(String pattern) {
-        return Collections.emptySet();
+        ClassNamePattern classNamePattern = new CamelCasePattern(pattern);
+        return classNames.stream()
+                .map(ClassName::new)
+                .filter(className -> classNamePattern.match(className.getSimpleClassName()))
+                .sorted()
+                .map(ClassName::getFullName)
+                .collect(toSet());
     }
 
 }
