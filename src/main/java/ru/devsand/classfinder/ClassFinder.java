@@ -4,7 +4,20 @@ public class ClassFinder {
 
     private static final String ERROR_LABEL = "Error:";
     private static final String HELP_FLAG = "--help";
-    private static final String TRY_HELP_MESSAGE = "Use " + HELP_FLAG + " for more information";
+    private static final String TRY_HELP_MESSAGE = "Try ~$ java -jar classfinder.jar "
+            + HELP_FLAG + " for more information";
+    private static final String HELP_MESSAGE =
+            "Usage: ~$ java -jar classfinder.jar [FLAG] <filename> <pattern>\n" +
+                    "Find names of Java classes in file <filename> " +
+                    "using search pattern <pattern>.\n" +
+                    "Search pattern <pattern> must include " +
+                    "class name camelcase upper case letters\n" +
+                    "in the right order and it may contain lower case letters\n" +
+                    "to narrow down the search results.\n" +
+                    "For example 'FB' or 'FoBa' patterns must all match " +
+                    "'a.b.FooBarBaz' and 'c.d.FooBar' classes.\n\n" +
+                    "Flags:\n" +
+                    "  --help    display this help and exit";
 
     public static void main(String[] args) {
         try {
@@ -48,7 +61,7 @@ public class ClassFinder {
     }
 
     private static void printHelp() {
-        System.out.println("Let I help you!");
+        System.out.println(HELP_MESSAGE);
     }
 
     private static void findClasses(String fileName, String pattern) {
