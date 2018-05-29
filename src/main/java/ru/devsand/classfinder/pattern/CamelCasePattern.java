@@ -1,14 +1,10 @@
 package ru.devsand.classfinder.pattern;
 
-import ru.devsand.classfinder.util.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.lang.Character.isDigit;
 import static java.util.stream.Collectors.toList;
+import static ru.devsand.classfinder.util.CamelCaseUtil.splitByCamelCaseDelimiter;
 import static ru.devsand.classfinder.util.CharUtil.isCapitalLetter;
 import static ru.devsand.classfinder.util.StringUtil.isLowerCase;
 
@@ -33,16 +29,12 @@ public class CamelCasePattern implements ClassNamePattern {
         if (isLowerCase(pattern)) {
             return splitPatternByLetter(pattern);
         } else {
-            return splitPatternByCase(pattern);
+            return splitByCamelCaseDelimiter(pattern);
         }
     }
 
     private static List<String> splitPatternByLetter(String pattern) {
         return pattern.chars().mapToObj(c -> String.valueOf((char) c)).collect(toList());
-    }
-
-    private static List<String> splitPatternByCase(String pattern) {
-        return Collections.emptyList();
     }
 
     private static boolean isDelimiter(char c) {
@@ -63,6 +55,7 @@ public class CamelCasePattern implements ClassNamePattern {
 
     @Override
     public boolean match(String className) {
+        final List<String> classNameParts = splitByCamelCaseDelimiter(className);
         return false;
     }
 

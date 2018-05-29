@@ -15,6 +15,10 @@ public class StringUtil {
         return string.equals(string.toLowerCase());
     }
 
+    public static List<String> split(String string, char delimiter) {
+        return split(string, c -> c == delimiter);
+    }
+
     public static List<String> split(String string, Predicate<Character> delimiterChecker) {
         return split(string, delimiterChecker, false);
     }

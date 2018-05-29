@@ -1,31 +1,37 @@
 package ru.devsand.classfinder.pattern;
 
-import java.util.Arrays;
 import java.util.List;
 
-class AsteriskPatternPart {
+import static ru.devsand.classfinder.util.StringUtil.replaceAll;
+import static ru.devsand.classfinder.util.StringUtil.split;
 
-    private static final String ASTERISK = "*";
-    private static final String ESCAPED_ASTERISK = "\\*";
+public class WildcardPatternPart {
+
+    private static final char DEFAULT_WILDCARD = '*';
+
     private final String patternPart;
     private final List<String> blocks;
 
-    private AsteriskPatternPart(String patternPart) {
+    private WildcardPatternPart(String patternPart, char wildcard) {
         this.patternPart = patternPart;
-        this.blocks = Arrays.asList(patternPart
-                .replaceAll(ESCAPED_ASTERISK + ESCAPED_ASTERISK, ASTERISK)
-                .split(ESCAPED_ASTERISK));
-        completeBlocks();
+        this.blocks = splitIntoBlocks(patternPart, wildcard);
     }
 
-    private void completeBlocks() {
-        if (patternPart.endsWith(ASTERISK)) {
-            blocks.add("");
-        }
+    private static List<String> splitIntoBlocks(String patternPart, char wildcard) {
+        patternPart = removeExtraWildcards(patternPart, wildcard);
+        return split(patternPart, wildcard);
     }
 
-    public static AsteriskPatternPart from(String patternPart) {
-        return new AsteriskPatternPart(patternPart);
+    private static String removeExtraWildcards(String patternPart, char wildcard) {
+        return replaceAll(patternPart, "" + wildcard + wildcard, "" + wildcard);
+    }
+
+    public static WildcardPatternPart from(String patternPart) {
+        return new WildcardPatternPart(patternPart, DEFAULT_WILDCARD);
+    }
+
+    public static WildcardPatternPart from(String patternPart, char wildcard) {
+        return new WildcardPatternPart(patternPart, wildcard);
     }
 
     public int compareToString(String s) {
