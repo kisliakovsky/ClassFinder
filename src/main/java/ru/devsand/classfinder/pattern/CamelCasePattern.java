@@ -50,6 +50,8 @@ public class CamelCasePattern implements ClassNamePattern {
     @Override
     public boolean match(String className) {
         final List<String> classNameParts = splitCamelCase(className);
+        // TODO: Implement match.
+        // patternParts can start from any part of class name, not only from the first one
         return false;
     }
 
