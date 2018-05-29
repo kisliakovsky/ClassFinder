@@ -37,16 +37,16 @@ public class ExampleDataTest {
     public Collection<String> remainedClasses;
 
 
-    private ClassFinder classFinder;
+    private ClassNameFinder classNameFinder;
 
     @Before
     public void setUp() {
-        classFinder = new SimpleClassFinder(
+        classNameFinder = new SimpleClassNameFinder(
                 () -> Arrays.asList("a.b.FooBarBaz", "c.d.FooBar", "BrBaz"));
     }
 
     @Test
     public void checkFind() {
-        assertThat(classFinder.find(pattern).equals(remainedClasses), is(true));
+        assertThat(classNameFinder.find(pattern).equals(remainedClasses), is(true));
     }
 }

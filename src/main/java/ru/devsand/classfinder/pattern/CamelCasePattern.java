@@ -4,7 +4,7 @@ import java.util.List;
 
 import static java.lang.Character.isDigit;
 import static java.util.stream.Collectors.toList;
-import static ru.devsand.classfinder.util.CamelCaseUtil.splitByCamelCaseDelimiter;
+import static ru.devsand.classfinder.util.CamelCaseUtil.splitCamelCase;
 import static ru.devsand.classfinder.util.CharUtil.isCapitalLetter;
 import static ru.devsand.classfinder.util.StringUtil.isLowerCase;
 
@@ -29,7 +29,7 @@ public class CamelCasePattern implements ClassNamePattern {
         if (isLowerCase(pattern)) {
             return splitPatternByLetter(pattern);
         } else {
-            return splitByCamelCaseDelimiter(pattern);
+            return splitCamelCase(pattern);
         }
     }
 
@@ -55,7 +55,7 @@ public class CamelCasePattern implements ClassNamePattern {
 
     @Override
     public boolean match(String className) {
-        final List<String> classNameParts = splitByCamelCaseDelimiter(className);
+        final List<String> classNameParts = splitCamelCase(className);
         return false;
     }
 

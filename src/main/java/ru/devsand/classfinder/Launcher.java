@@ -2,8 +2,8 @@ package ru.devsand.classfinder;
 
 import ru.devsand.classfinder.extract.TextFileReader;
 import ru.devsand.classfinder.extract.TextReader;
-import ru.devsand.classfinder.search.ClassFinder;
-import ru.devsand.classfinder.search.SimpleClassFinder;
+import ru.devsand.classfinder.search.ClassNameFinder;
+import ru.devsand.classfinder.search.SimpleClassNameFinder;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,7 +76,7 @@ public class Launcher {
     private static Collection<String> findClassNamesInFile(String[] args) {
         Path filePath = Paths.get(args[0]);
         TextReader classNamesSupplier = new TextFileReader(filePath);
-        ClassFinder classFinder = new SimpleClassFinder(classNamesSupplier);
+        ClassNameFinder classFinder = new SimpleClassNameFinder(classNamesSupplier);
         String pattern = args[1];
         return classFinder.find(pattern);
     }

@@ -4,13 +4,13 @@ import ru.devsand.classfinder.util.StringUtil;
 
 import java.util.List;
 
-public class CamelCaseClassName implements ClassName<CamelCaseClassName> {
+public class CamelCaseName implements ClassName<CamelCaseName> {
 
     private final String fullName;
     private final String packageName;
     private final String simpleClassName;
 
-    public CamelCaseClassName(String className) {
+    public CamelCaseName(String className) {
         fullName = className;
         List<String> classNameParts = StringUtil.split(className, '.');
         packageName = separatePackageName(classNameParts);
@@ -42,8 +42,12 @@ public class CamelCaseClassName implements ClassName<CamelCaseClassName> {
 
 
     @Override
-    public int compareTo(CamelCaseClassName o) {
+    public int compareTo(CamelCaseName o) {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return fullName;
+    }
 }

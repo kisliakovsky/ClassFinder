@@ -4,6 +4,7 @@ import java.util.List;
 
 import static java.lang.Character.isDigit;
 import static ru.devsand.classfinder.util.CharUtil.isCapitalLetter;
+import static ru.devsand.classfinder.util.StringUtil.splitButRemainDelimiter;
 
 public class CamelCaseUtil {
 
@@ -12,8 +13,14 @@ public class CamelCaseUtil {
         throw new AssertionError();
     }
 
-    public static List<String> splitByCamelCaseDelimiter(String string) {
-        return StringUtil.splitButRemainDelimiter(string, CamelCaseUtil::isCamelCaseDelimiter);
+    public static List<String> splitCamelCase(String string) {
+        final List<String> parts = splitByCamelCaseDelimiter(string);
+        parts.remove(0);
+        return parts;
+    }
+
+    private static List<String> splitByCamelCaseDelimiter(String string) {
+        return splitButRemainDelimiter(string, CamelCaseUtil::isCamelCaseDelimiter);
     }
 
     private static boolean isCamelCaseDelimiter(char c) {

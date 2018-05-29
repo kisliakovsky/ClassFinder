@@ -4,10 +4,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
@@ -16,15 +16,16 @@ public class CamelCasePatternInitTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"FB", true, Arrays.asList("F", "B")},
-                {"FoBa", true, Arrays.asList("Fo", "Ba")},
-                {"FBar", true, Arrays.asList("F", "Bar")}
+                {new CamelCasePattern("FB"), false, Arrays.asList("F", "B")},
+                {new CamelCasePattern("FoBa"), false, Arrays.asList("Fo", "Ba")},
+                {new CamelCasePattern("FBar"), false, Arrays.asList("F", "Bar")},
+                {new CamelCasePattern("FBar "), true, Arrays.asList("F", "Bar")}
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public String pattern;
+    public CamelCasePattern pattern;
 
     @Parameterized.Parameter(value = 1)
     public boolean presenceOfLastWord;
@@ -34,7 +35,8 @@ public class CamelCasePatternInitTest {
 
     @Test
     public void checkNewInstances() {
-
+        assertThat(pattern.containsLastWord(), is(presenceOfLastWord));
+        assertThat(pattern.getPatternParts(), is(parts));
     }
 
 }
