@@ -1,11 +1,12 @@
 package ru.devsand.classfinder;
 
+import ru.devsand.classfinder.extract.TextFileReader;
+import ru.devsand.classfinder.extract.TextReader;
 import ru.devsand.classfinder.search.ClassFinder;
 import ru.devsand.classfinder.search.SimpleClassFinder;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class Launcher {
@@ -33,7 +34,8 @@ public class Launcher {
             if (args.length == 1) {
                 printHelp();
             } else {
-                printClassNames(args);
+                final Collection<String> classNames = findClassNamesInFile(args);
+                printClassNames(classNames);
             }
         } catch (IllegalArgumentException ignored) {
         }
@@ -71,13 +73,18 @@ public class Launcher {
         System.out.println(HELP_MESSAGE);
     }
 
-    private static void printClassNames(String[] args) {
+    private static Collection<String> findClassNamesInFile(String[] args) {
         Path filePath = Paths.get(args[0]);
+        TextReader classNamesSupplier = new TextFileReader(filePath);
+        ClassFinder classFinder = new SimpleClassFinder(classNamesSupplier);
         String pattern = args[1];
-        ClassFinder classFinder = new SimpleClassFinder(
-                () -> Arrays.asList("a.b.FooBarBaz", "c.d.FooBar"));
-        Collection<String> classNames = classFinder.find(pattern);
+        return classFinder.find(pattern);
+    }
+
+    private static void printClassNames(Collection<String> classNames) {
         classNames.forEach(System.out::println);
     }
+
+
 
 }
