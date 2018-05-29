@@ -10,13 +10,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class CamelCaseNameInitTest {
+public class CamelCaseClassNameInitTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new CamelCaseName("a.b.FooBarBaz"), "a.b.FooBarBaz", "a.b", "FooBarBaz"},
-                {new CamelCaseName("c.d.FooBar"), "c.d.FooBar", "c.d", "FooBar"},
+                {new CamelCaseClassName("FooBarBaz"), "FooBarBaz", "", "FooBarBaz"},
+                {new CamelCaseClassName("a.b.FooBarBaz"), "a.b.FooBarBaz", "a.b", "FooBarBaz"},
+                {new CamelCaseClassName("c.d.FooBar"), "c.d.FooBar", "c.d", "FooBar"},
         });
     }
 

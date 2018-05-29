@@ -2,7 +2,7 @@ package ru.devsand.classfinder.search;
 
 import ru.devsand.classfinder.pattern.CamelCasePattern;
 import ru.devsand.classfinder.pattern.ClassNamePattern;
-import ru.devsand.classfinder.stringwrap.CamelCaseName;
+import ru.devsand.classfinder.stringwrap.CamelCaseClassName;
 
 import java.util.Collection;
 import java.util.function.Supplier;
@@ -20,10 +20,10 @@ public class SimpleClassNameFinder implements ClassNameFinder {
     public Collection<String> find(String pattern) {
         ClassNamePattern classNamePattern = new CamelCasePattern(pattern);
         return classNames.stream()
-                .map(CamelCaseName::new)
+                .map(CamelCaseClassName::new)
                 .filter(className -> classNamePattern.match(className.getSimpleClassName()))
                 .sorted()
-                .map(CamelCaseName::getFullName)
+                .map(CamelCaseClassName::getFullName)
                 .collect(toList());
     }
 

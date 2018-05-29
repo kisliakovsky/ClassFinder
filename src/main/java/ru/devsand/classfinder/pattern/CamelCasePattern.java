@@ -2,10 +2,8 @@ package ru.devsand.classfinder.pattern;
 
 import java.util.List;
 
-import static java.lang.Character.isDigit;
 import static java.util.stream.Collectors.toList;
 import static ru.devsand.classfinder.util.CamelCaseUtil.splitCamelCase;
-import static ru.devsand.classfinder.util.CharUtil.isCapitalLetter;
 import static ru.devsand.classfinder.util.StringUtil.isLowerCase;
 
 public class CamelCasePattern implements ClassNamePattern {
@@ -35,10 +33,6 @@ public class CamelCasePattern implements ClassNamePattern {
 
     private static List<String> splitPatternByLetter(String pattern) {
         return pattern.chars().mapToObj(c -> String.valueOf((char) c)).collect(toList());
-    }
-
-    private static boolean isDelimiter(char c) {
-        return isCapitalLetter(c) || isDigit(c);
     }
 
     public String getPattern() {
