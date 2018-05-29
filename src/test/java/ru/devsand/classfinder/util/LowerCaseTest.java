@@ -8,32 +8,32 @@ import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.devsand.classfinder.util.CharUtil.isCapitalLetter;
+import static ru.devsand.classfinder.util.StringUtil.isLowerCase;
 
 @RunWith(Parameterized.class)
-public class CapitalLetterTest {
+public class LowerCaseTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {'A', true},
-                {'Г', true},
-                {'b', false},
-                {'1', false},
-                {'+', false}
+                {"abracadabra", true},
+                {"aBracAdabra", false},
+                {"язык", true},
+                {"Character", false},
+                {"dfdg4gfgh", true}
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public char c;
+    public String s;
 
     @Parameterized.Parameter(value = 1)
     public boolean expectedResult;
 
     @Test
-    public void checkIfCapitalLetter() {
-        assertThat(isCapitalLetter(c), is(expectedResult));
+    public void checkIfLowerCase() {
+        assertThat(isLowerCase(s), is(expectedResult));
     }
 
 }

@@ -1,39 +1,40 @@
-package ru.devsand.classfinder.util;
+package ru.devsand.classfinder.pattern;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.devsand.classfinder.util.CharUtil.isCapitalLetter;
 
 @RunWith(Parameterized.class)
-public class CapitalLetterTest {
+public class CamelCasePatternInitTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {'A', true},
-                {'Г', true},
-                {'b', false},
-                {'1', false},
-                {'+', false}
+                {"FB", true, Arrays.asList("F", "B")},
+                {"FoBa", true, Arrays.asList("Fo", "Ba")},
+                {"FBar", true, Arrays.asList("F", "Bar")}
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public char c;
+    public String pattern;
 
     @Parameterized.Parameter(value = 1)
-    public boolean expectedResult;
+    public boolean presenceOfLastWord;
+
+    @Parameterized.Parameter(value = 2)
+    public List<String> parts;
 
     @Test
-    public void checkIfCapitalLetter() {
-        assertThat(isCapitalLetter(c), is(expectedResult));
+    public void checkNewInstances() {
+
     }
 
 }
