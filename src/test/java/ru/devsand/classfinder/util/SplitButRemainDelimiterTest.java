@@ -11,17 +11,18 @@ import java.util.function.Predicate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.devsand.classfinder.util.StringUtil.split;
+import static ru.devsand.classfinder.util.StringUtil.splitButRemainDelimiter;
 
 @RunWith(Parameterized.class)
-public class SplitTest {
+public class SplitButRemainDelimiterTest {
 
     private static final Predicate<Character> DEFAULT_PREDICATE = (c) -> c == '*';
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"*ab*racad*abra*", Arrays.asList("", "ab", "racad", "abra", "")},
-                {"*", Arrays.asList("", "")},
+                {"*ab*racad*abra*", Arrays.asList("", "*ab", "*racad", "*abra", "*")},
+                {"*", Arrays.asList("", "*")},
         });
     }
 
@@ -34,7 +35,7 @@ public class SplitTest {
 
     @Test
     public void checkSplit() {
-        assertThat(split(s, DEFAULT_PREDICATE), is(splitString));
+        assertThat(splitButRemainDelimiter(s, DEFAULT_PREDICATE), is(splitString));
     }
 
 }

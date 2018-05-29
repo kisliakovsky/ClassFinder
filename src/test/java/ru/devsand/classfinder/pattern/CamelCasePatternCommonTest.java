@@ -75,9 +75,4 @@ public class CamelCasePatternCommonTest {
         assertThat(pattern.toString(), is(PATTERN));
     }
 
-    @Test
-    public void checkSome() {
-        System.out.println("abr**ra".compareTo("brabcdacadabcdra"));
-    }
-
 }

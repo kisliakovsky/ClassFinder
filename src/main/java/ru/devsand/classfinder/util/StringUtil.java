@@ -16,6 +16,16 @@ public class StringUtil {
     }
 
     public static List<String> split(String string, Predicate<Character> delimiterChecker) {
+        return split(string, delimiterChecker, false);
+    }
+
+    public static List<String> splitButRemainDelimiter(String string,
+                                                       Predicate<Character> delimiterChecker) {
+        return split(string, delimiterChecker, true);
+    }
+
+    private static List<String> split(String string, Predicate<Character> delimiterChecker,
+                                     boolean remainDelimiter) {
         final List<String> parts = new ArrayList<>();
         StringBuilder partBuilder = new StringBuilder();
         for (char c: string.toCharArray()) {
@@ -23,11 +33,15 @@ public class StringUtil {
                 String stringPart = partBuilder.toString();
                 parts.add(stringPart);
                 clearStringBuilder(partBuilder);
-                partBuilder.append(c);
+                if (remainDelimiter) {
+                    partBuilder.append(c);
+                }
             } else {
                 partBuilder.append(c);
             }
         }
+        String stringPart = partBuilder.toString();
+        parts.add(stringPart);
         return parts;
     }
 
