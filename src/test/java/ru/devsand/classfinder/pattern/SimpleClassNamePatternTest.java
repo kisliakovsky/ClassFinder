@@ -15,7 +15,8 @@ public class SimpleClassNamePatternTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new SimpleClassNamePattern("FB"), "FooBar", true}
+                {new SimpleClassNamePattern("FB"), "FooBar", true},
+                {new SimpleClassNamePattern("aFB"), "antiFooBar", true},
         });
     }
 

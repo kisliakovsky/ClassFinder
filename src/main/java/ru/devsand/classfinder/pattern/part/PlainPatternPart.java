@@ -8,7 +8,11 @@ class PlainPatternPart extends AbstractPatternPart {
 
     @Override
     public int compareToString(String s) {
-        return patternPart.compareTo(s);
+        if (s.startsWith(patternPart)) {
+            return 0;
+        } else {
+            return (patternPart.compareTo(s));
+        }
     }
 
 }

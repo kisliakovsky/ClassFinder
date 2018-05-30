@@ -1,14 +1,14 @@
 package ru.devsand.classfinder.pattern.part;
 
-class CaseInsensitivePatternPart extends AbstractPatternPart {
+class CaseInsensitivePatternPart extends PlainPatternPart {
 
     CaseInsensitivePatternPart(String patternPart) {
-        super(patternPart);
+        super(patternPart.toLowerCase());
     }
 
     @Override
     public int compareToString(String s) {
-        return patternPart.toLowerCase().compareTo(s.toLowerCase());
+        return super.compareToString(s.toLowerCase());
     }
 
 }
