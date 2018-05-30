@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class CamelCaseClassNameInitTest {
+public class SimpleClassNameInitTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
@@ -39,6 +39,7 @@ public class CamelCaseClassNameInitTest {
         assertThat(className.getFullName(), is(fullName));
         assertThat(className.getPackageName(), is(packageName));
         assertThat(className.getShortClassName(), is(simpleClassName));
+        assertThat(className.toString(), is(fullName));
     }
 
 }

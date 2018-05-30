@@ -17,16 +17,16 @@ public class SimpleClassNamePatternInitTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new SimpleClassNamePattern("FB"), false, Arrays.asList("F", "B")},
-                {new SimpleClassNamePattern("FoBa"), false, Arrays.asList("Fo", "Ba")},
-                {new SimpleClassNamePattern("FBar"), false, Arrays.asList("F", "Bar")},
-                {new SimpleClassNamePattern("FBar "), true, Arrays.asList("F", "Bar")}
+                {"FB", false, Arrays.asList("F", "B")},
+                {"FoBa", false, Arrays.asList("Fo", "Ba")},
+                {"FBar", false, Arrays.asList("F", "Bar")},
+                {"FBar ", true, Arrays.asList("F", "Bar")}
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public SimpleClassNamePattern pattern;
+    public String pattern;
 
     @Parameterized.Parameter(value = 1)
     public boolean presenceOfLastWord;
@@ -36,8 +36,10 @@ public class SimpleClassNamePatternInitTest {
 
     @Test
     public void checkNewInstances() {
-        assertThat(pattern.containsLastWord(), is(presenceOfLastWord));
-        assertThat(pattern.getPatternParts().stream()
+        final SimpleClassNamePattern classNamePattern = new SimpleClassNamePattern(pattern);
+        assertThat(classNamePattern.getPattern(), is(pattern));
+        assertThat(classNamePattern.containsLastWord(), is(presenceOfLastWord));
+        assertThat(classNamePattern.getPatternParts().stream()
                 .map(Object::toString)
                 .collect(Collectors.toList()), is(parts));
     }
