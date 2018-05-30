@@ -10,10 +10,11 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.devsand.classfinder.util.StringUtil.split;
 
 @RunWith(Parameterized.class)
 public class SplitTest {
+
+    private static final SimpleStringSplitter SPLITTER = new SimpleStringSplitter();
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
@@ -39,7 +40,7 @@ public class SplitTest {
 
     @Test
     public void checkSplit() {
-        assertThat(split(string, c -> c == delimiter), is(splitString));
+        assertThat(SPLITTER.apply(string, delimiter), is(splitString));
     }
 
 }

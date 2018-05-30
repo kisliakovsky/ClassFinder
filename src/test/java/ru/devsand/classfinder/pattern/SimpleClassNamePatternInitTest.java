@@ -6,26 +6,27 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class CamelCasePatternInitTest {
+public class SimpleClassNamePatternInitTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new CamelCasePattern("FB"), false, Arrays.asList("F", "B")},
-                {new CamelCasePattern("FoBa"), false, Arrays.asList("Fo", "Ba")},
-                {new CamelCasePattern("FBar"), false, Arrays.asList("F", "Bar")},
-                {new CamelCasePattern("FBar "), true, Arrays.asList("F", "Bar")}
+                {new SimpleClassNamePattern("FB"), false, Arrays.asList("F", "B")},
+                {new SimpleClassNamePattern("FoBa"), false, Arrays.asList("Fo", "Ba")},
+                {new SimpleClassNamePattern("FBar"), false, Arrays.asList("F", "Bar")},
+                {new SimpleClassNamePattern("FBar "), true, Arrays.asList("F", "Bar")}
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public CamelCasePattern pattern;
+    public SimpleClassNamePattern pattern;
 
     @Parameterized.Parameter(value = 1)
     public boolean presenceOfLastWord;
@@ -36,7 +37,9 @@ public class CamelCasePatternInitTest {
     @Test
     public void checkNewInstances() {
         assertThat(pattern.containsLastWord(), is(presenceOfLastWord));
-        assertThat(pattern.getPatternParts(), is(parts));
+        assertThat(pattern.getPatternParts().stream()
+                .map(Object::toString)
+                .collect(Collectors.toList()), is(parts));
     }
 
 }

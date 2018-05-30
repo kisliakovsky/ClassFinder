@@ -10,18 +10,18 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class CamelCasePatternTest {
+public class SimpleClassNamePatternTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new CamelCasePattern("FB"), "FooBar", true}
+                {new SimpleClassNamePattern("FB"), "FooBar", true}
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public CamelCasePattern pattern;
+    public SimpleClassNamePattern pattern;
 
     @Parameterized.Parameter(value = 1)
     public String className;

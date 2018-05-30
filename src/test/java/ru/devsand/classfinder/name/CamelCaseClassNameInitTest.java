@@ -1,4 +1,4 @@
-package ru.devsand.classfinder.stringwrap;
+package ru.devsand.classfinder.name;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +15,9 @@ public class CamelCaseClassNameInitTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new CamelCaseClassName("FooBarBaz"), "FooBarBaz", "", "FooBarBaz"},
-                {new CamelCaseClassName("a.b.FooBarBaz"), "a.b.FooBarBaz", "a.b", "FooBarBaz"},
-                {new CamelCaseClassName("c.d.FooBar"), "c.d.FooBar", "c.d", "FooBar"},
+                {new SimpleClassName("FooBarBaz"), "FooBarBaz", "", "FooBarBaz"},
+                {new SimpleClassName("a.b.FooBarBaz"), "a.b.FooBarBaz", "a.b", "FooBarBaz"},
+                {new SimpleClassName("c.d.FooBar"), "c.d.FooBar", "c.d", "FooBar"},
         });
     }
 
@@ -38,7 +38,7 @@ public class CamelCaseClassNameInitTest {
     public void checkNewInstances() {
         assertThat(className.getFullName(), is(fullName));
         assertThat(className.getPackageName(), is(packageName));
-        assertThat(className.getSimpleClassName(), is(simpleClassName));
+        assertThat(className.getShortClassName(), is(simpleClassName));
     }
 
 }

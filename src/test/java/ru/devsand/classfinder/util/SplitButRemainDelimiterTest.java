@@ -10,13 +10,14 @@ import java.util.function.Predicate;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.devsand.classfinder.util.StringUtil.split;
-import static ru.devsand.classfinder.util.StringUtil.splitButRemainDelimiter;
 
 @RunWith(Parameterized.class)
 public class SplitButRemainDelimiterTest {
 
+    private static final RemainedDelimiterStringSplitter SPLITTER =
+            new RemainedDelimiterStringSplitter();
     private static final Predicate<Character> DEFAULT_PREDICATE = (c) -> c == '*';
+
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
@@ -35,7 +36,7 @@ public class SplitButRemainDelimiterTest {
 
     @Test
     public void checkSplit() {
-        assertThat(splitButRemainDelimiter(s, DEFAULT_PREDICATE), is(splitString));
+        assertThat(SPLITTER.apply(s, DEFAULT_PREDICATE), is(splitString));
     }
 
 }

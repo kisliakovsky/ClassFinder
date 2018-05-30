@@ -9,10 +9,12 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.devsand.classfinder.util.CamelCaseUtil.splitCamelCase;
 
 @RunWith(Parameterized.class)
 public class SplitCamelCaseTest {
+
+    private static final SpecialStringSplitter<String> SPLITTER = new SimpleCamelCaseSplitter();
+
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
@@ -32,6 +34,6 @@ public class SplitCamelCaseTest {
 
     @Test
     public void checkSplit() {
-        assertThat(splitCamelCase(string), is(splitString));
+        assertThat(SPLITTER.apply(string), is(splitString));
     }
 }

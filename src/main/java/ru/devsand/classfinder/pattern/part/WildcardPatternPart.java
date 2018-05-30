@@ -1,19 +1,16 @@
-package ru.devsand.classfinder.pattern;
+package ru.devsand.classfinder.pattern.part;
 
 import java.util.List;
 
+import static ru.devsand.classfinder.util.StringSplitters.split;
 import static ru.devsand.classfinder.util.StringUtil.replaceAll;
-import static ru.devsand.classfinder.util.StringUtil.split;
 
-public class WildcardPatternPart {
+class WildcardPatternPart extends AbstractPatternPart {
 
-    private static final char DEFAULT_WILDCARD = '*';
-
-    private final String patternPart;
     private final List<String> blocks;
 
-    private WildcardPatternPart(String patternPart, char wildcard) {
-        this.patternPart = patternPart;
+    WildcardPatternPart(String patternPart, char wildcard) {
+        super(patternPart);
         this.blocks = splitIntoBlocks(patternPart, wildcard);
     }
 
@@ -26,14 +23,7 @@ public class WildcardPatternPart {
         return replaceAll(patternPart, "" + wildcard + wildcard, "" + wildcard);
     }
 
-    public static WildcardPatternPart from(String patternPart) {
-        return new WildcardPatternPart(patternPart, DEFAULT_WILDCARD);
-    }
-
-    public static WildcardPatternPart from(String patternPart, char wildcard) {
-        return new WildcardPatternPart(patternPart, wildcard);
-    }
-
+    @Override
     public int compareToString(String s) {
         if (startsWith(s) && endsWith(s) && containsBetweenInRightOrder(s)) {
                 return 0;

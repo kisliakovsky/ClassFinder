@@ -12,12 +12,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class CamelCasePatternCommonTest {
+public class SimpleClassNamePatternCommonTest {
 
     private static final String PATTERN = "FoBa";
     private static final String OTHER_PATTERN = "FBar";
     private static final Supplier<ClassNamePattern> PATTERN_FACTORY =
-            () -> new CamelCasePattern(PATTERN);
+            () -> new SimpleClassNamePattern(PATTERN);
     private static final Function<Integer, List<ClassNamePattern>> PATTERN_GENERATOR =
             (n) -> IntStream.range(0, n)
                     .mapToObj(i -> PATTERN_FACTORY.get())
@@ -63,7 +63,7 @@ public class CamelCasePatternCommonTest {
     @Test
     public void checkHashCodeForNonEquals() {
         final int firstHashCode = PATTERN_FACTORY.get().hashCode();
-        final int secondHashCode = new CamelCasePattern(OTHER_PATTERN).hashCode();
+        final int secondHashCode = new SimpleClassNamePattern(OTHER_PATTERN).hashCode();
         assertThat(firstHashCode, is(not(secondHashCode)));
     }
 

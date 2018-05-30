@@ -1,24 +1,24 @@
-package ru.devsand.classfinder.stringwrap;
+package ru.devsand.classfinder.name;
 
-import ru.devsand.classfinder.util.StringUtil;
+import ru.devsand.classfinder.util.StringSplitters;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CamelCaseClassName implements ClassName<CamelCaseClassName> {
+public class SimpleClassName implements ClassName<SimpleClassName> {
 
     private static final char PACKAGE_SEPARATOR = '.';
 
     private final String fullName;
     private final String packageName;
-    private final String simpleClassName;
+    private final String shortClassName;
 
-    public CamelCaseClassName(String className) {
+    public SimpleClassName(String className) {
         fullName = className;
-        List<String> classNameParts = StringUtil.split(className, PACKAGE_SEPARATOR);
+        List<String> classNameParts = StringSplitters.split(className, PACKAGE_SEPARATOR);
         packageName = separatePackageName(classNameParts);
-        simpleClassName = separateSimpleClassName(classNameParts);
+        shortClassName = separateSimpleClassName(classNameParts);
     }
 
     private static String separatePackageName(List<String> classNameParts) {
@@ -49,13 +49,13 @@ public class CamelCaseClassName implements ClassName<CamelCaseClassName> {
     }
 
     @Override
-    public String getSimpleClassName() {
-        return simpleClassName;
+    public String getShortClassName() {
+        return shortClassName;
     }
 
     @Override
-    public int compareTo(CamelCaseClassName another) {
-        return this.simpleClassName.compareTo(another.simpleClassName);
+    public int compareTo(SimpleClassName another) {
+        return this.shortClassName.compareTo(another.shortClassName);
     }
 
     @Override
