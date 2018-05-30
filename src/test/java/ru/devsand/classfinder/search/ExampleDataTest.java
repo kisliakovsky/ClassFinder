@@ -8,6 +8,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,11 +19,11 @@ public class ExampleDataTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"FB", Arrays.asList("a.b.FooBarBaz", "c.d.FooBar")},
-                {"FoBa", Arrays.asList("a.b.FooBarBaz", "c.d.FooBar")},
-                {"FBar", Arrays.asList("a.b.FooBarBaz", "c.d.FooBar")},
+                {"FB", Arrays.asList("c.d.FooBar", "a.b.FooBarBaz")},
+                {"FoBa", Arrays.asList("c.d.FooBar", "a.b.FooBarBaz")},
+                {"FBar", Arrays.asList("c.d.FooBar", "a.b.FooBarBaz")},
                 {"BF", Collections.emptyList()},
-                {"fbb", Arrays.asList("a.b.FooBarBaz", "c.d.FooBar")},
+                {"fbb", Collections.singletonList("a.b.FooBarBaz")},
                 {"fBb", Collections.emptyList()},
                 {"FBar ", Collections.singletonList("c.d.FooBar")},
                 {"B*rBaz", Collections.singletonList("a.b.FooBarBaz")},
@@ -34,7 +35,7 @@ public class ExampleDataTest {
     public String pattern;
 
     @Parameterized.Parameter(value = 1)
-    public Collection<String> remainedClasses;
+    public List<String> remainedClasses;
 
 
     private ClassNameFinder classNameFinder;
@@ -47,6 +48,6 @@ public class ExampleDataTest {
 
     @Test
     public void checkFind() {
-        assertThat(classNameFinder.find(pattern).equals(remainedClasses), is(true));
+        assertThat(classNameFinder.find(pattern), is(remainedClasses));
     }
 }

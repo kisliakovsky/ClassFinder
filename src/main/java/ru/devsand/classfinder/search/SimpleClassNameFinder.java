@@ -5,6 +5,7 @@ import ru.devsand.classfinder.pattern.ClassNamePattern;
 import ru.devsand.classfinder.name.SimpleClassName;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.toList;
@@ -17,7 +18,7 @@ public class SimpleClassNameFinder implements ClassNameFinder {
         this.classNames = dataSupplier.get();
     }
 
-    public Collection<String> find(String pattern) {
+    public List<String> find(String pattern) {
         ClassNamePattern classNamePattern = new SimpleClassNamePattern(pattern);
         return classNames.stream()
                 .map(SimpleClassName::new)

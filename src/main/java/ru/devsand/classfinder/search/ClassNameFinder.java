@@ -1,9 +1,9 @@
 package ru.devsand.classfinder.search;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface ClassNameFinder {
 
-    Collection<String> find(String pattern);
+    List<String> find(String pattern);
 
 }

@@ -20,7 +20,6 @@ public class SimpleClassNamePatternTest {
                 {"FB", "FooBarBaz", true},
                 {"FoBa", "FooBarBaz", true},
                 {"FBar", "FooBarBaz", true},
-                {"FB", "FooBar", true},
                 {"FoBa", "FooBar", true},
                 {"FBar", "FooBar", true},
                 {"BF", "FooBar", false},
