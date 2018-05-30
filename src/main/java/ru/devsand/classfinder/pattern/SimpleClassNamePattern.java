@@ -61,9 +61,9 @@ public class SimpleClassNamePattern implements ClassNamePattern {
     }
 
     private boolean matchParts(List<PatternPart> patternParts, List<String> classNameParts) {
-        if (patternParts.size() == 0) {
+        if (patternParts.isEmpty()) {
             return true;
-        } else if (classNameParts.size() == 0) {
+        } else if (classNameParts.isEmpty()) {
             return false;
         } else {
             PatternPart firstPatternPart = patternParts.get(0);
@@ -73,7 +73,8 @@ public class SimpleClassNamePattern implements ClassNamePattern {
                 classNameParts.remove(0);
                 return matchParts(patternParts, classNameParts);
             } else {
-                return false;
+                classNameParts.remove(0);
+                return matchParts(patternParts, classNameParts);
             }
         }
     }

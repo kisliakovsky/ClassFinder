@@ -15,14 +15,27 @@ public class SimpleClassNamePatternTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {new SimpleClassNamePattern("FB"), "FooBar", true},
-                {new SimpleClassNamePattern("aFB"), "antiFooBar", true},
+                {"FB", "FooBar", true},
+                {"aFB", "antiFooBar", true},
+                {"FB", "FooBarBaz", true},
+                {"FoBa", "FooBarBaz", true},
+                {"FBar", "FooBarBaz", true},
+                {"FB", "FooBar", true},
+                {"FoBa", "FooBar", true},
+                {"FBar", "FooBar", true},
+                {"BF", "FooBar", false},
+                {"fbb", "FooBarBaz", true},
+                {"fBb", "FooBarBaz", false},
+                {"FBar ", "FooBar", true},
+                {"FBar ", "FooBarBaz", false},
+                {"B*rBaz", "FooBarBaz", true},
+                {"B*rBaz", "BrBaz", false},
         });
     }
 
     @SuppressWarnings("DefaultAnnotationParam")
     @Parameterized.Parameter(value = 0)
-    public SimpleClassNamePattern pattern;
+    public String pattern;
 
     @Parameterized.Parameter(value = 1)
     public String className;
@@ -32,7 +45,7 @@ public class SimpleClassNamePatternTest {
 
     @Test
     public void checkMatch() {
-        assertThat(pattern.match(className), is(matched));
+        assertThat(new SimpleClassNamePattern(pattern).match(className), is(matched));
     }
 
 }

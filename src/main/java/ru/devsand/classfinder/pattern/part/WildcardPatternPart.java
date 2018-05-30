@@ -8,10 +8,15 @@ import static ru.devsand.classfinder.util.StringUtil.replaceAll;
 class WildcardPatternPart extends AbstractPatternPart {
 
     private final List<String> blocks;
+    private final String startBlock;
+    private final String endBlock;
 
     WildcardPatternPart(String patternPart, char wildcard) {
         super(patternPart);
-        this.blocks = splitIntoBlocks(patternPart, wildcard);
+        blocks = splitIntoBlocks(patternPart, wildcard);
+        startBlock = blocks.get(0);
+        int endIndex = blocks.size() - 1;
+        endBlock = blocks.get(endIndex);
     }
 
     private static List<String> splitIntoBlocks(String patternPart, char wildcard) {
@@ -24,37 +29,36 @@ class WildcardPatternPart extends AbstractPatternPart {
     }
 
     @Override
-    public int compareToString(String s) {
-        if (startsWith(s) && endsWith(s) && containsBetweenInRightOrder(s)) {
-                return 0;
-        } else {
-            return (int) Math.signum(patternPart.compareTo(s));
+    public int compareToString(String string) {
+        int defaultComparison = (int) Math.signum(patternPart.compareTo(string));
+        StringBuilder stringBuilder = new StringBuilder(string);
+        int pointer = -1;
+        if (startBlock.equals("")) {
+            pointer = 0;
         }
-    }
-
-    private boolean startsWith(String s) {
-        return s.startsWith(blocks.get(0));
-    }
-
-    private boolean containsBetweenInRightOrder(String s) {
-        int lastIndex = blocks.size() - 1;
-        StringBuilder stringBuilder = new StringBuilder(s);
-        final List<String> intermediateBlocks = blocks.subList(1, lastIndex);
-        for (String block: intermediateBlocks) {
-            final int blockIndex = stringBuilder.indexOf(block);
-            boolean blockFound = (blockIndex != -1);
-            if (blockFound) {
-                stringBuilder.delete(blockIndex, blockIndex + block.length());
-            } else {
-                return false;
+        for (String block: blocks) {
+            if (!block.equals("")) {
+                int blockIndex = stringBuilder.indexOf(block);
+                if (blockIndex == -1) {
+                    return defaultComparison;
+                } else {
+                    stringBuilder.delete(blockIndex, blockIndex + block.length());
+                    if (blockIndex > pointer) {
+                        pointer = blockIndex;
+                    } else {
+                        return defaultComparison;
+                    }
+                }
             }
         }
-        return true;
-    }
-
-    private boolean endsWith(String s) {
-        int lastIndex = blocks.size() - 1;
-        return s.endsWith(blocks.get(lastIndex));
+        if (endBlock.equals("")) {
+            if (pointer < stringBuilder.length()) {
+                return 0;
+            } else {
+                return defaultComparison;
+            }
+        }
+        return 0;
     }
 
     @Override

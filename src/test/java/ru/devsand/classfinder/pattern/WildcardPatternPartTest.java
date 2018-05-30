@@ -17,19 +17,18 @@ public class WildcardPatternPartTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {from("abr*acad*r*a", '*'), "abrabcdacadabcdrabca", 0},
-                {from("abr*acad*ra", '*'), "abrabcdacadabcdra", 0},
-                {from("abr**ra", '*'), "abrabcdacadabcdra", 0},
-                {from("*ra", '*'), "abcra", 0},
-                {from("ra*", '*'), "raabc", 0},
-                {from("*ra*", '*'), "abcrabfgfg", 0},
-                {from("*ra**", '*'), "rabfgfg", 0},
-                {from("abr*acad*r*a", '*'), "abrabcdabcdrabca", -1},
-                {from("abr*acad*ra", '*'), "abrabcdacadabcdr", -1},
-                {from("abr**ra", '*'), "brabcdacadabcdra", -1},
-                {from("*ra", '*'), "abcr", -1},
-                {from("*ra*", '*'), "abcrbfgfg", -1},
-                {from("*ra**", '*'), "abcabfgfg", -1},
+                {from("*bcd*fgh*jkl*nop*", '*'), "abcdefghijklmnopq", 0},
+                {from("*bcd*fgh*jkl*nop*", '*'), "aabcdeefghiiiijklmmmmmnopq", 0},
+                {from("abc*efg", '*'), "abcdefg", 0},
+                {from("*bcd*fgh*jkl*nop*", '*'), "bcdefghijklmnopq", -1},
+                {from("*bcd*fgh*jkl*nop*", '*'), "abcdefghijklmnop", -1},
+                {from("abc*efg", '*'), "abcefg", -1},
+                {from("*", '*'), "abcefg", 0},
+                {from("**", '*'), "abcefg", 0},
+                {from("*bcd*fgh*jkl*nop*", '*'), "abcefg", -1},
+                {from("bcd*fgh*jkl*nop", '*'), "abcefg", 1},
+                {from("bcd*fgh*jkl*nop*", '*'), "abcefg", 1},
+                {from("*bcd*fgh*jkl*nop", '*'), "abcefg", -1},
         });
     }
 
