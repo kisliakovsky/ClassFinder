@@ -13,11 +13,13 @@ public class SimpleClassNamePattern implements ClassNamePattern {
 
     private int hashCode;
     private final String pattern;
+    private final boolean emptyPatternFlag;
     private final boolean lastWordFlag;
     private final List<PatternPart> patternParts;
 
     public SimpleClassNamePattern(String pattern) {
         this.pattern = pattern;
+        this.emptyPatternFlag = pattern.isEmpty();
         this.lastWordFlag = containsLastWord(pattern);
         this.patternParts = patternSplitter.apply(pattern.trim());
     }
@@ -32,6 +34,9 @@ public class SimpleClassNamePattern implements ClassNamePattern {
 
     @Override
     public boolean match(String className) {
+        if (emptyPatternFlag) {
+            return false;
+        }
         List<String> classNameParts = splitAsCamelCase(className);
         List<PatternPart> patternParts = copyList(this.patternParts);
         if (lastWordFlag) {

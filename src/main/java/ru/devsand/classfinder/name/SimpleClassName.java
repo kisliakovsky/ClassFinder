@@ -59,6 +59,23 @@ public class SimpleClassName implements ClassName<SimpleClassName> {
     }
 
     @Override
+    public boolean equals(Object another) {
+        if (another == this) {
+            return true;
+        }
+        if (!(another instanceof SimpleClassName)) {
+            return false;
+        }
+        final SimpleClassName simpleClassName = (SimpleClassName) another;
+        return simpleClassName.shortClassName.equals(shortClassName);
+    }
+
+    @Override
+    public int hashCode() {
+        return shortClassName.hashCode();
+    }
+
+    @Override
     public String toString() {
         return fullName;
     }

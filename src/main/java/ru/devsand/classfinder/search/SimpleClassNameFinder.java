@@ -1,5 +1,6 @@
 package ru.devsand.classfinder.search;
 
+import ru.devsand.classfinder.extract.TextSupplier;
 import ru.devsand.classfinder.pattern.SimpleClassNamePattern;
 import ru.devsand.classfinder.pattern.ClassNamePattern;
 import ru.devsand.classfinder.name.SimpleClassName;
@@ -12,9 +13,9 @@ import static java.util.stream.Collectors.toList;
 
 public class SimpleClassNameFinder implements ClassNameFinder {
 
-    private final Collection<String> classNames;
+    private final List<String> classNames;
 
-    public SimpleClassNameFinder(Supplier<Collection<String>> dataSupplier) {
+    public SimpleClassNameFinder(TextSupplier dataSupplier) {
         this.classNames = dataSupplier.get();
     }
 

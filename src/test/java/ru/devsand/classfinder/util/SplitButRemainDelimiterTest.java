@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -24,6 +25,7 @@ public class SplitButRemainDelimiterTest {
         return Arrays.asList(new Object[][] {
                 {"*ab*racad*abra*", Arrays.asList("", "*ab", "*racad", "*abra", "*")},
                 {"*", Arrays.asList("", "*")},
+                {"", singletonList("")},
         });
     }
 

@@ -33,11 +33,11 @@ class WildcardPatternPart extends AbstractPatternPart {
         int defaultComparison = (int) Math.signum(patternPart.compareTo(string));
         StringBuilder stringBuilder = new StringBuilder(string);
         int pointer = -1;
-        if (startBlock.equals("")) {
+        if (startBlock.isEmpty()) {
             pointer = 0;
         }
         for (String block: blocks) {
-            if (!block.equals("")) {
+            if (!block.isEmpty()) {
                 int blockIndex = stringBuilder.indexOf(block);
                 if (blockIndex == -1) {
                     return defaultComparison;
@@ -51,7 +51,7 @@ class WildcardPatternPart extends AbstractPatternPart {
                 }
             }
         }
-        if (endBlock.equals("")) {
+        if (endBlock.isEmpty()) {
             if (pointer < stringBuilder.length()) {
                 return 0;
             } else {

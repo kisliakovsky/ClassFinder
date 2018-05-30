@@ -7,6 +7,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -21,7 +22,9 @@ public class SplitCamelCaseTest {
                 {"FooBarBaz", Arrays.asList("Foo", "Bar", "Baz")},
                 {"FB", Arrays.asList("F", "B")},
                 {"FBar", Arrays.asList("F", "Bar")},
-                {"B*rBaz", Arrays.asList("B*r", "Baz")}
+                {"B*rBaz", Arrays.asList("B*r", "Baz")},
+                {"B", singletonList("B")},
+                {"", singletonList("")},
         });
     }
 

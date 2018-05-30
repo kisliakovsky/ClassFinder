@@ -1,12 +1,10 @@
 package ru.devsand.classfinder.search;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +23,7 @@ public class ExampleDataTest {
                 {"BF", Collections.emptyList()},
                 {"fbb", Collections.singletonList("a.b.FooBarBaz")},
                 {"fBb", Collections.emptyList()},
+                {"anydifferentwords", Collections.emptyList()},
                 {"FBar ", Collections.singletonList("c.d.FooBar")},
                 {"B*rBaz", Collections.singletonList("a.b.FooBarBaz")},
         });
@@ -35,19 +34,13 @@ public class ExampleDataTest {
     public String pattern;
 
     @Parameterized.Parameter(value = 1)
-    public List<String> remainedClasses;
+    public List<String> remainedClassNames;
 
-
-    private ClassNameFinder classNameFinder;
-
-    @Before
-    public void setUp() {
-        classNameFinder = new SimpleClassNameFinder(
+    private static ClassNameFinder classNameFinder = new SimpleClassNameFinder(
                 () -> Arrays.asList("a.b.FooBarBaz", "c.d.FooBar", "BrBaz"));
-    }
 
     @Test
     public void checkFind() {
-        assertThat(classNameFinder.find(pattern), is(remainedClasses));
+        assertThat(classNameFinder.find(pattern), is(remainedClassNames));
     }
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,6 +26,7 @@ public class SplitTest {
                         Arrays.asList("abr", "acad", "abra")},
                 {"ab.racad.abra", '.', Arrays.asList("ab", "racad", "abra")},
                 {"*", '*', Arrays.asList("", "")},
+                {"", '*', singletonList("")},
         });
     }
 

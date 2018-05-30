@@ -28,7 +28,7 @@ public class WildcardPatternPartTest {
                 {from("*bcd*fgh*jkl*nop*", '*'), "abcefg", -1},
                 {from("bcd*fgh*jkl*nop", '*'), "abcefg", 1},
                 {from("bcd*fgh*jkl*nop*", '*'), "abcefg", 1},
-                {from("*bcd*fgh*jkl*nop", '*'), "abcefg", -1},
+                {from("*bcd*fgh*jkl*nop", '*'), "abcefg", -1}
         });
     }
 

@@ -29,6 +29,8 @@ public class SimpleClassNamePatternTest {
                 {"FBar ", "FooBarBaz", false},
                 {"B*rBaz", "FooBarBaz", true},
                 {"B*rBaz", "BrBaz", false},
+                {"", "BrBaz", false},
+                {"SomeText", "FooBarBaz", false},
         });
     }
 

@@ -20,6 +20,7 @@ public class ReplaceAllTest {
                 {"abracadabra", "a", "x", "xbrxcxdxbrx"},
                 {"**ab**racad**abra**", "**", "*", "*ab*racad*abra*"},
                 {"****", "**", "*", "*"},
+                {"", "**", "*", ""},
         });
     }
 

@@ -12,7 +12,7 @@ public class SimpleCamelCaseSplitter extends RemainedDelimiterStringSplitter imp
     @Override
     public List<String> apply(String string) {
         List<String> splits = innerSplitter.apply(string, SimpleCamelCaseSplitter::isDelimiter);
-        if (isDelimiter(string.charAt(0))) {
+        if (!string.isEmpty() && isDelimiter(string.charAt(0))) {
             splits.remove(0);
         }
         return splits;

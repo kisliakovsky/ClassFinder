@@ -20,7 +20,9 @@ public class LowerCaseTest {
                 {"aBracAdabra", false},
                 {"язык", true},
                 {"Character", false},
-                {"dfdg4gfgh", true}
+                {"dfdg4gfgh", true},
+                {"1", true},
+                {"", true}
         });
     }
 
