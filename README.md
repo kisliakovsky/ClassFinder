@@ -10,7 +10,7 @@ Find names of Java classes in file <filename> using search pattern <pattern>.
 Search pattern <pattern> must include class name camelcase upper case letters
 in the right order and it may contain lower case letters
 to narrow down the search results.  
-####Example
+#### Example
 **Input**
 ```bash
 ~$ java -jar classfinder.jar ./classes.txt FB
@@ -20,7 +20,7 @@ to narrow down the search results.
 a.b.FooBarBaz  
 c.d.FooBar  
 ```
-####Flags  
+#### Flags  
  
 **--help**  
 display this help and exit
