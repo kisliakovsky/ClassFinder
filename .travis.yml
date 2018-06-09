@@ -4,3 +4,5 @@ jdk:
 branches:
   only:
   - redesign
+before_install:
+  - chmod +x gradlew
