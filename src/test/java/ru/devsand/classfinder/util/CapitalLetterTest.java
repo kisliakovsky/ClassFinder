@@ -17,7 +17,6 @@ public class CapitalLetterTest {
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
                 {'A', true},
-                {'Г', true},
                 {'b', false},
                 {'1', false},
                 {'+', false}
