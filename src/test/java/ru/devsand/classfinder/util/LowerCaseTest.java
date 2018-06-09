@@ -18,7 +18,6 @@ public class LowerCaseTest {
         return Arrays.asList(new Object[][] {
                 {"abracadabra", true},
                 {"aBracAdabra", false},
-                {"язык", true},
                 {"Character", false},
                 {"dfdg4gfgh", true},
                 {"1", true},
