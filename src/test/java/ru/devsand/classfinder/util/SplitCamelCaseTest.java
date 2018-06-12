@@ -14,8 +14,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(Parameterized.class)
 public class SplitCamelCaseTest {
 
-    private static final SpecialStringSplitter<String> SPLITTER = new SimpleCamelCaseSplitter();
-
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
@@ -37,6 +35,6 @@ public class SplitCamelCaseTest {
 
     @Test
     public void checkSplit() {
-        assertThat(SPLITTER.apply(string), is(splitString));
+        assertThat(StringSplitters.splitAsCamelCase(string), is(splitString));
     }
 }

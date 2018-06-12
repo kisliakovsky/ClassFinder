@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.devsand.classfinder.util.StringUtil.isLowerCase;
 import static ru.devsand.classfinder.util.StringUtil.replaceAll;
 
 @RunWith(Parameterized.class)

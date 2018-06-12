@@ -15,8 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(Parameterized.class)
 public class SplitTest {
 
-    private static final SimpleStringSplitter SPLITTER = new SimpleStringSplitter();
-
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
@@ -42,7 +40,7 @@ public class SplitTest {
 
     @Test
     public void checkSplit() {
-        assertThat(SPLITTER.apply(string, delimiter), is(splitString));
+        assertThat(StringSplitters.split(string, delimiter), is(splitString));
     }
 
 }

@@ -1,4 +1,4 @@
-package ru.devsand.classfinder.name;
+package ru.devsand.classfinder.pattern;
 
 import org.junit.Test;
 
@@ -12,35 +12,34 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class SimpleClassNameCommonTest {
+public class SimpleClassNamePatternObjectMethodsTest {
 
-    private static final String CLASS_NAME = "a.b.FooBar";
-    private static final String OTHER_CLASS_NAME = "c.d.FooBarBaz";
-
-    private static final Supplier<ClassName> CLASS_NAME_FACTORY =
-            () -> new SimpleClassName(CLASS_NAME);
-    private static final Function<Integer, List<ClassName>> CLASS_NAME_GENERATOR =
+    private static final String PATTERN = "FoBa";
+    private static final String OTHER_PATTERN = "FBar";
+    private static final Supplier<ClassNamePattern> PATTERN_FACTORY =
+            () -> new SimpleClassNamePattern(PATTERN);
+    private static final Function<Integer, List<ClassNamePattern>> PATTERN_GENERATOR =
             (n) -> IntStream.range(0, n)
-                    .mapToObj(i -> CLASS_NAME_FACTORY.get())
+                    .mapToObj(i -> PATTERN_FACTORY.get())
                     .collect(toList());
 
     @Test
     public void checkReflexivity() {
-        final ClassName pattern = CLASS_NAME_FACTORY.get();
+        final ClassNamePattern pattern = PATTERN_FACTORY.get();
         //noinspection EqualsWithItself
         assertThat(pattern.equals(pattern), is(true));
     }
 
     @Test
     public void checkSymmetry() {
-        final List<ClassName> patterns = CLASS_NAME_GENERATOR.apply(2);
+        final List<ClassNamePattern> patterns = PATTERN_GENERATOR.apply(2);
         assertThat(patterns.get(0).equals(patterns.get(1)),
                 is(patterns.get(1).equals(patterns.get(0))));
     }
 
     @Test
     public void checkTransitivity() {
-        final List<ClassName> patterns = CLASS_NAME_GENERATOR.apply(3);
+        final List<ClassNamePattern> patterns = PATTERN_GENERATOR.apply(3);
         assertThat(patterns.get(0).equals(patterns.get(1)), is(true));
         assertThat(patterns.get(1).equals(patterns.get(2)), is(true));
         assertThat(patterns.get(0).equals(patterns.get(2)), is(true));
@@ -48,14 +47,14 @@ public class SimpleClassNameCommonTest {
 
     @Test
     public void checkNonNullity() {
-        final ClassName pattern = CLASS_NAME_FACTORY.get();
+        final ClassNamePattern pattern = PATTERN_FACTORY.get();
         //noinspection ConstantConditions,ObjectEqualsNull
         assertThat(pattern.equals(null), is(false));
     }
 
     @Test
     public void checkHashCodeForEquals() {
-        final List<Integer> hashCodes = CLASS_NAME_GENERATOR.apply(3).stream()
+        final List<Integer> hashCodes = PATTERN_GENERATOR.apply(3).stream()
                 .map(Object::hashCode)
                 .collect(toList());
         assertThat(hashCodes.get(0), is(hashCodes.get(1)));
@@ -63,15 +62,15 @@ public class SimpleClassNameCommonTest {
 
     @Test
     public void checkHashCodeForNonEquals() {
-        final int firstHashCode = CLASS_NAME_FACTORY.get().hashCode();
-        final int secondHashCode = new SimpleClassName(OTHER_CLASS_NAME).hashCode();
+        final int firstHashCode = PATTERN_FACTORY.get().hashCode();
+        final int secondHashCode = new SimpleClassNamePattern(OTHER_PATTERN).hashCode();
         assertThat(firstHashCode, is(not(secondHashCode)));
     }
 
     @Test
     public void checkToString() {
-        final ClassName pattern = CLASS_NAME_FACTORY.get();
-        assertThat(pattern.toString(), is(CLASS_NAME));
+        final ClassNamePattern pattern = PATTERN_FACTORY.get();
+        assertThat(pattern.toString(), is(PATTERN));
     }
 
 }

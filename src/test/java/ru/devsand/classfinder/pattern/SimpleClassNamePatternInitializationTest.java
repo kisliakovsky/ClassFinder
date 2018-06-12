@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class SimpleClassNamePatternInitTest {
+public class SimpleClassNamePatternInitializationTest {
 
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {

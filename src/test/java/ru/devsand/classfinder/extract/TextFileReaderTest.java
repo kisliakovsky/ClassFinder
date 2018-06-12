@@ -17,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TextFileReaderTest {
 
     @Test
-    public void checkFirstLine() throws IOException {
+    public void checkFirstLineMustBeReadRightFromTestFile() throws IOException {
         ClassLoader classLoader = TextFileReaderTest.class.getClassLoader();
         URL textFileUrl = classLoader.getResource("classes.txt");
         requireNonNull(textFileUrl);
