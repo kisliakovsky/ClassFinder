@@ -2,9 +2,9 @@ package ru.devsand.classfinder.pattern.part;
 
 public abstract class AbstractPatternPart implements PatternPart {
 
-    protected final String patternPart;
+    final String patternPart;
 
-    public AbstractPatternPart(String patternPart) {
+    AbstractPatternPart(String patternPart) {
         this.patternPart = patternPart;
     }
 

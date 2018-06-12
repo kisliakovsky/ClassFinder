@@ -1,13 +1,11 @@
 package ru.devsand.classfinder.search;
 
 import ru.devsand.classfinder.extract.TextSupplier;
-import ru.devsand.classfinder.pattern.SimpleClassNamePattern;
-import ru.devsand.classfinder.pattern.ClassNamePattern;
 import ru.devsand.classfinder.name.SimpleClassName;
+import ru.devsand.classfinder.pattern.ClassNamePattern;
+import ru.devsand.classfinder.pattern.SimpleClassNamePattern;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.toList;
 
